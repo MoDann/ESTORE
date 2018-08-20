@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+			
+<mapper namespace="com.briup.estore.dao.ICartDao">
+	 <insert id="saveCart" parameterType="com.briup.estore.common.bean.Cart">
+ 		<selectKey keyColumn="id" keyProperty="id" resultType="int" order="BEFORE">
+ 			select cart_seq.nextval from dual
+ 		</selectKey>
+ 		insert into cart values(#{id},#{book.id},#{customer.id},#{num},#{price})
+ 	</insert>
+ 	
+ 	<resultMap type="com.briup.estore.common.bean.Book" id="BookResult">
+ 		<id column="bid" property="id"/>
+ 		<result column="name" property="name"/>
+ 		<result column="bprice" property="price"/>
+ 		<result column="description" property="description"/>
+ 		<result column="bnum" property="num"/>
+ 		<result column="status" property="status"/>
+ 		<result column="pic" property="pic"/>
+ 		<result column="author" property="author"/>
+ 	</resultMap>
+ 	<resultMap type="com.briup.estore.common.bean.Cart" id="CartResult">
+ 		<id column="cartid" property="id"/>
+ 		<result column="cnum" property="num"/>
+ 		<result column="cprice" property="price"/>
+ 		<association property="book" resultMap="BookResult"></association>
+ 	</resultMap>
+ 	
+ 	<select id="findCartsByCid" parameterType="int" resultMap="CartResult">
+ 		select cart.id as cartid,cart.num as cnum,cart.price as cprice,
+ 		b.id as bid,b.name,b.price as bprice,description,b.num as bnum,status,pic,author
+ 		from cart,book b
+ 		where bid = b.id and cid=#{cid}
+ 	</select>
+ 	
+ 	<select id="findByCidAndBid" resultType="com.briup.estore.common.bean.Cart">
+ 		select *
+ 		from cart
+ 		where bid =#{param2} and cid=#{param1}
+ 	</select>
+ 	
+ 	<update id="updateCart" parameterType="com.briup.estore.common.bean.Cart">
+ 		update cart set num=#{num}
+ 		where cid=#{customer.id} and bid=#{book.id}
+ 	</update>
+ 	
+ 	<delete id="deleteCartByCid" parameterType="int">
+ 		delete from cart where cid=#{cid}
+ 	</delete>
+</mapper>

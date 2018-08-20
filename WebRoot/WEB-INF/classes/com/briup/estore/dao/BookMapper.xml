@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.briup.estore.dao.IBookDao">
+
+	<select id="queryAll" resultType="com.briup.estore.common.bean.Book">
+		select * from book
+	</select>
+ 	
+ 	<select id="queryByName" parameterType="String" resultType="com.briup.estore.common.bean.Book">
+ 		select * from book where name=#{name}
+ 	</select>
+ 	
+ 	<resultMap type="com.briup.estore.common.bean.Book" id="BookResult">
+ 		<id column="bid" property="id"/>
+ 		<result column="bname" property="name"/>
+ 		<result column="price" property="price"/>
+ 		<result column="description" property="description"/>
+ 		<result column="num" property="num"/>
+ 		<result column="status" property="status"/>
+ 		<result column="pic" property="pic"/>
+ 		<result column="author" property="author"/>
+ 	</resultMap>
+ 	<resultMap type="com.briup.estore.common.bean.Type" id="BookWithType">
+ 		<id column="tid" property="id"/>
+ 		<result column="tname" property="name"/>
+ 		<collection property="books" resultMap="BookResult"></collection>
+ 	</resultMap>
+ 	
+ 	<select id="queryById" parameterType="int" resultType="com.briup.estore.common.bean.Book">
+ 		select * from book where id=#{id}
+ 	</select>
+ 	
+ 	<select id="queryByBookId" parameterType="int" resultMap="BookWithType">
+ 		select b.id as bid,b.name as bname,price,description,num,status,pic,author,t.id as tid,t.name as tname
+ 		from book b,type t
+ 		where t.id=b.tid and b.id=#{id}
+ 	</select>
+ 	
+
+	<update id="updateNum">
+		update book set num=#{param1} where id=#{param2}
+	</update>
+	
+	<update id="updateStatus" parameterType="com.briup.estore.common.bean.Book">
+		update book set status=#{book.status} where id=#{book.id}
+	</update>
+	
+	<select id="selectBook" parameterType="java.util.Map" resultMap="BookResult">
+ 		select * 
+ 		from book
+ 		<where>
+ 			<if test="name!=null">
+ 				name like #{name}
+ 			</if>
+ 			<if test="tid!=null">
+ 				and tid like #{tid}
+ 			</if>
+ 			<if test="author!=null">
+ 				and author like #{author}
+ 			</if>
+ 			<if test="price1!=null">
+ 				and price <![CDATA[ >= ]]> #{price1}
+ 			</if>
+ 			 <if test="price2!=null">
+ 				and price <![CDATA[ <= ]]> #{price2}
+ 			</if>
+ 		</where>
+ 	</select>
+ 	
+ 	
+ 	<select id="findType" resultType="com.briup.estore.common.bean.Type">
+ 		select * from type
+ 	</select>
+ 	
+ 	<select id="getTypeByName" parameterType="String" resultType="com.briup.estore.common.bean.Type">
+ 		select * from type where name=#{name}
+ 	</select>
+</mapper>			

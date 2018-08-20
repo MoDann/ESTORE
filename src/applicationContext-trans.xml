@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<!-- 配置service层中事务提交问题 -->
+
+	<!-- 配置事务管理器 ,操作数据库-->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSourse"/>
+	</bean>
+	
+	<!-- 基于注解形式 -->
+	<!-- <tx:annotation-driven transaction-manager="transactionManager"/> -->
+	
+	<!-- 基于配置文件形式 -->
+	<!-- 配置通知 -->
+	<tx:advice transaction-manager="transactionManager" id="txAdvice">
+		<tx:attributes>
+			<!-- name 方法名, isolation 隔离级别 -->
+			<tx:method name="insert*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+		 	<tx:method name="save*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+		 	<tx:method name="add*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+		 	<tx:method name="delete*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+		 	<tx:method name="remove*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+		 	<tx:method name="update*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+		 	<tx:method name="modify*" isolation="DEFAULT" propagation="REQUIRED" read-only="false"/>
+		 	<tx:method name="find*" isolation="DEFAULT" propagation="REQUIRED" read-only="true"/>
+		 	<tx:method name="select*" isolation="DEFAULT" propagation="REQUIRED" read-only="true"/>
+		 	<tx:method name="query*" isolation="DEFAULT" propagation="REQUIRED" read-only="true"/>
+		 	<tx:method name="list*" isolation="DEFAULT" propagation="REQUIRED" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 配置切面= advice + pointcut 
+		 aop：本质是代理，将通知织入
+	-->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.briup.estore.service..*.*(..))" id="point"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="point"/>
+	</aop:config>
+</beans>

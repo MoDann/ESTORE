@@ -54,7 +54,9 @@
       在listBookStore.jsp中填入图书数量并点击购买按钮后往购物车(ShoppingCart.java)中增加一个Orderline.
 
       具体步骤： 1) 创建OrderFormAction.java
-                2) 在该Action中根据从listBookStore.jsp页面传入的bookid和num来构造一个Orderline对象，然后从Session中获得购物车(ShoppingCart)的对                  象，并且 调用其中的addLine(Orderline orderline)方法往购物车中增加一个Orderline对象。
+                2) 在该Action中根据从listBookStore.jsp页面传入的bookid和num来构造一个Orderline对象，
+                然后从Session中获得购物车(ShoppingCart)的对象，并且 调用其中的addLine(Orderline orderline)
+                方法往购物车中增加一个Orderline对象。
                 3) 增加Orderline成功后跳转到myOrders.jsp页面
       3.2查看购物车
       在listBookStore.jsp页面上点击查看购物车的按钮可以查看购物车中所有Orderline的信息。
@@ -71,7 +73,8 @@
       3.4修改orderLine
       在shopCar.jsp页面上修改图书数量并点击修改按钮后可以修改指定一个Orderline的信息。
       具体步骤：1) 创建EditOrderline.action
-               2) 在该Action中先从Session中获得ShoppingCart对象，然后获得从listCart.jsp传递过来的lineid(bookid)和num，最后根据lineid来获得指定的             Orderline对象，并且修改数量为num。
+               2) 在该Action中先从Session中获得ShoppingCart对象，然后获得从listCart.jsp传递过来的lineid(bookid)和num，
+               最后根据lineid来获得指定的Orderline对象，并且修改数量为num。
                3) 修改成功后跳转到shopCar.jsp页面
 
       3.5 清空购物车
@@ -90,8 +93,10 @@
                4) 查找订单成功后跳转到myOrders.jsp页面，并将订单信息在该页面上显示。
 
       4.2 提交订单
-      在shopCar.jsp页面上点击提交订单的按钮后链接到myOrders.jsp页面，然后在该页面上点击确认订单按钮后才正式提交订单，将订单信息分别保存到orderform和     orderline表中。
-      具体步骤：1) 先链接到Order.jsp页面，在该页面上从Session中分别取出Customer和ShoppingCart对象并将它们的信息显示在页面，在该页面还可以修改用户信息。
+      在shopCar.jsp页面上点击提交订单的按钮后链接到myOrders.jsp页面，然后在该页面上点击确认订单按钮后才正式提交订单，
+      将订单信息分别保存到orderform和orderline表中。
+      具体步骤：1) 先链接到Order.jsp页面，在该页面上从Session中分别取出Customer和ShoppingCart对象并将它们
+            的信息显示在页面，在该页面还可以修改用户信息。
                2) 实现IOrderDao接口中的saveOrder()方法
                3) 实现IOrderService接口中的业务方法saveOrder()
                4) 实现ICustomerService接口中的业务方法update()
@@ -106,7 +111,8 @@
       具体步骤：1) 实现IOrderDao接口中的deleteOrder()方法
                2) 实现IOrderService接口中的业务方法delOrder()
                3) 创建DelOrder.action
-               4) 在该Action中获得从myOrders.jsp传递过来的orderid，然后根据该orderid，调用IOrderService接口中的delOrder()方法删除指定的订单。
+               4) 在该Action中获得从myOrders.jsp传递过来的orderid，然后根据该orderid，调用IOrderService
+               接口中的delOrder()方法删除指定的订单。
                5) 订单删除成功后跳转到toMyOrders.action
 
      5.支付

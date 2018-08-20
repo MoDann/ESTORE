@@ -3,10 +3,10 @@
 
 <br>
 
-![]() <br>
-![]() <br>
-![]() <br>
-![]() <br>
+![](https://github.com/MoDann/image/blob/master/estore/design/%E5%9B%BE%E7%89%8726.png) <br>
+![](https://github.com/MoDann/image/blob/master/estore/design/%E5%9B%BE%E7%89%8727.png) <br>
+![](https://github.com/MoDann/image/blob/master/estore/design/%E5%9B%BE%E7%89%8728.png) <br>
+![](https://github.com/MoDann/image/blob/master/estore/design/%E5%9B%BE%E7%89%8729.png) <br>
 
 
 ### 项目整体操作说明 
@@ -42,7 +42,8 @@
              3．创建RegisterAction.java，在该Action中调用ICustomerService接口中的register()方法进行注册。
 
     2.登录
-      在login.jsp页面上用户可以输入用户名和密码进行登陆，如果用户名和密码都正确，则登陆成功跳转到Index.jsp。如果不正确，需要提示用户并且还是跳转到login.jsp页面继续登陆。
+      在login.jsp页面上用户可以输入用户名和密码进行登陆，如果用户名和密码都正确，则登陆成功跳转到Index.jsp。
+      如果不正确，需要提示用户并且还是跳转到login.jsp页面继续登陆。
     具体过程： 1．查看登陆的用户名是否存在
               2．查看密码是否正确
 

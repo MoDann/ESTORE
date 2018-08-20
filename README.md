@@ -147,7 +147,8 @@
   
   >支付<br>
   ![](https://github.com/MoDann/image/blob/master/estore/result/%E5%9B%BE%E7%89%8723.png)<br>
-  ![](https://github.com/MoDann/image/blob/master/estore/result/%E5%9B%BE%E7%89%8724.png)
+  ![](https://github.com/MoDann/image/blob/master/estore/result/%E5%9B%BE%E7%89%8724.png) <br>
+  ![](https://github.com/MoDann/image/blob/master/estore/result/%E5%9B%BE%E7%89%8725.png)
   <br>
 
           
